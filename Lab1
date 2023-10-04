@@ -1,0 +1,25 @@
+import numpy as np
+from PIL import Image
+
+print('------ZAD 2-----')#ZAD 2
+obrazek = Image.open("inicjaly.bmp") #Stwórz obrazek i dodaj do projektu
+print("tryb:", obrazek.mode)
+print("format:", obrazek.format)
+print("rozmiar:", obrazek.size)
+#obrazek.show()
+
+
+print('-----ZAD 3-----')
+dane_obrazka = np.asarray(obrazek)
+print(dane_obrazka)  # mozna  zobaczyć tablicę
+
+print('-----ZAD 4-----')
+#a)
+print("---------------- informacje o tablicy obrazu----------------")
+print("typ danych tablicy:", dane_obrazka.dtype)
+print("rozmiar tablicy:", dane_obrazka.shape)
+print("liczba elementow:", dane_obrazka.size)
+print("wymiar tablicy:", dane_obrazka.ndim)
+print("rozmiar wyrazu tablicy:", dane_obrazka.itemsize)
+print("pierwszy wyraz:", dane_obrazka[30][50])
+print("drugi wyraz:", dane_obrazka[40][90])
