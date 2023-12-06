@@ -1,0 +1,39 @@
+from PIL import Image
+from PIL import ImageFilter
+from PIL import ImageChops
+import matplotlib.pyplot as plt
+
+obraz = Image.open('obraz.jpg')
+
+
+def filtruj(obraz, kernel, scale):
+
+    im_1 = obraz.copy()
+    im_2 = obraz.copy()
+    w, h = obraz.size
+    pix1 = im_1.load()
+    pix2 = im_2.load()
+    k = int(len(kernel))
+    d = int(k / 2)
+    for i in range(d, w - d):
+        for j in range(d, h - d):
+            temp = [0, 0, 0]
+            for a in range(k):
+                for b in range(k):
+                    new_i = i + a - d
+                    new_j = j + b - d
+                    pixel = pix1[new_i, new_j]
+                    temp[0] += pixel[0] * kernel[a][b]
+                    temp[1] += pixel[1] * kernel[a][b]
+                    temp[2] += pixel[2] * kernel[a][b]
+            pix2[i, j] = (int(temp[0] / scale), int(temp[1] / scale), int(temp[2] / scale))
+    return im_2
+
+
+kernel = [[-1, -1, -1], [-1, 8, -1], [-1, -1, -1]]
+im = obraz.copy()
+im1 = filtruj(im, kernel, 1)
+# im1.show()
+
+im2 = im.filter(ImageFilter.BLUR)
+im2.show()
